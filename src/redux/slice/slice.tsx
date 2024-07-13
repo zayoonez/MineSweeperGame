@@ -2,12 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface State {}
 const initialState: State = {};
-// const typeSlice = createSlice({
-// //   name: "mi",
-// //   initialState,
-//   reducers: {},
-//   },
-// );
+const gameSlice = createSlice({
+  name: "minesweeper",
+  initialState,
+  reducers: {},
+});
 
 // export const { setSelectedOption } = typeSlice.actions;
 

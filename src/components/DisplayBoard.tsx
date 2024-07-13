@@ -25,6 +25,7 @@ const MineNumDisplay = styled.div`
 `;
 const MainButton = styled.div`
   background-color: white;
+  cursor: pointer;
 `;
 const Timer = styled.div`
   background-color: black;

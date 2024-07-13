@@ -30,7 +30,7 @@ function App() {
       <Menu />
       <Boards>
         <DisplayBoard mineNumValue={0} timeValue={0} />
-        <GameBoard />
+        <GameBoard rows={8} cols={8} />
       </Boards>
     </GameContainer>
   );
