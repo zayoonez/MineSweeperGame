@@ -17,10 +17,7 @@ const gameSlice = createSlice({
   name: "game",
   initialState,
   reducers: {
-    setDifficulty: (
-      state,
-      action: PayloadAction<"Beginner" | "Intermediate" | "Expert">
-    ) => {
+    setDifficulty: (state, action) => {
       switch (action.payload) {
         case "Beginner":
           state.rows = 8;
@@ -41,9 +38,15 @@ const gameSlice = createSlice({
           break;
       }
     },
+    setCustomDifficulty: (state, action) => {
+      state.rows = action.payload.rows;
+      state.cols = action.payload.cols;
+      state.mines = action.payload.mines;
+      console.log(state.rows);
+    },
   },
 });
 
-export const { setDifficulty } = gameSlice.actions;
+export const { setDifficulty, setCustomDifficulty } = gameSlice.actions;
 
 export default gameSlice.reducer;

@@ -1,5 +1,7 @@
 import React, { useCallback, useRef, useState } from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { setCustomDifficulty } from "../../redux/slice/gameSlice";
 
 export interface ModalProps {
   setIsModalOpen: any;
@@ -83,6 +85,7 @@ function Modal({ setIsModalOpen }: ModalProps) {
   const [height, setHeight] = useState("");
   const [width, setWidth] = useState("");
   const [mineNumber, setMineNumber] = useState("");
+  const dispatch = useDispatch();
 
   // 모달창 외부 클릭 시 닫기 위한 ref
   const clickedRef = useRef<EventTarget>();
@@ -97,6 +100,13 @@ function Modal({ setIsModalOpen }: ModalProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    dispatch(
+      setCustomDifficulty({
+        rows: parseInt(height),
+        cols: parseInt(width),
+        mines: parseInt(mineNumber),
+      })
+    );
     setIsModalOpen(false);
     // 세팅한 값으로 게임 시작
   };
@@ -108,7 +118,6 @@ function Modal({ setIsModalOpen }: ModalProps) {
     }
 
     e.stopPropagation();
-    // onClose();
     setIsModalOpen(false);
   }
   // 동적으로 최대 지뢰수 계산

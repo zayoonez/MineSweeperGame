@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import { useDispatch, UseDispatch } from "react-redux";
 import { setDifficulty } from "../redux/slice/gameSlice";
-import Modal from "./Modal/Modal";
+import Modal from "./Modal/CustomModal";
 
 const MenuContainer = styled.div`
   display: flex;
