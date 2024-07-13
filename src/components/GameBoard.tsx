@@ -1,19 +1,18 @@
 import styled from "styled-components";
 import Cell from "./Cell";
 import { CellState } from "../constants/types";
-
-interface GameBoardProps {
-  rows: number;
-  cols: number;
-}
+import { RootState } from "../redux/store";
+import { useSelector } from "react-redux";
 
 const Container = styled.div<{ rows: number; cols: number }>`
   display: grid;
-  grid-template-columns: repeat(${(props) => props.cols}, 1fr);
   grid-template-rows: repeat(${(props) => props.rows}, 1fr);
+  grid-template-columns: repeat(${(props) => props.cols}, 1fr);
 `;
 
-function GameBoard({ rows, cols }: GameBoardProps) {
+function GameBoard() {
+  const rows = useSelector((state: RootState) => state.game.rows);
+  const cols = useSelector((state: RootState) => state.game.cols);
   const totalCells = rows * cols;
   const initialCellState: CellState = {
     isOpened: false,

@@ -19,10 +19,6 @@ const Boards = styled.div`
   background-color: silver;
   height: 150px;
 `;
-// const GameBoard = styled.div`
-//   width: 200px;
-//   /* height: 260px; */
-// `;
 
 function App() {
   return (
@@ -30,7 +26,7 @@ function App() {
       <Menu />
       <Boards>
         <DisplayBoard mineNumValue={0} timeValue={0} />
-        <GameBoard rows={8} cols={8} />
+        <GameBoard />
       </Boards>
     </GameContainer>
   );

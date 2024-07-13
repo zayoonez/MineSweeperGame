@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
+import { useDispatch, UseDispatch } from "react-redux";
+import { setDifficulty } from "../redux/slice/gameSlice";
 
 const MenuContainer = styled.div`
   display: flex;
@@ -18,6 +20,7 @@ const MenuContainer = styled.div`
 const MenuButton = styled.div`
   cursor: default;
 `;
+
 const MenuContent = styled.div<{ isOpen: boolean }>`
   display: ${({ isOpen }) => (isOpen ? "block" : "none")};
   position: absolute;
@@ -43,25 +46,32 @@ const MenuContent = styled.div<{ isOpen: boolean }>`
 const ExitButton = styled.div`
   /* font-size: 12px; */
 `;
+const DifficultyList = ["Beginner", "Intermediate", "Expert"] as const;
 
 function Menu() {
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const handleClickMenu = () => {
     setIsOpen(!isOpen);
   };
+  const handleDifficulty = (
+    difficulty: (typeof DifficultyList)[number] // "Beginner" , "Intermediate" , "Expert"
+  ) => {
+    dispatch(setDifficulty(difficulty));
+    setIsOpen(false);
+  };
 
-  //   const handleMouseLeave = () => {
-  //     setIsOpen(false);
-  //   };
   return (
     <MenuContainer>
       <MenuButton onClick={handleClickMenu}>Game</MenuButton>
       <MenuContent isOpen={isOpen}>
         <div>New Game</div>
-        <div>Beginner</div>
-        <div>Intermediate</div>
-        <div>Expert</div>
+        {DifficultyList.map((d) => (
+          <div key={d} onClick={() => handleDifficulty(d)}>
+            {d}
+          </div>
+        ))}
         <div>Custom</div>
       </MenuContent>
 
