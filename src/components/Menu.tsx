@@ -5,10 +5,11 @@ const MenuContainer = styled.div`
   display: flex;
   flex-direction: row;
   font-size: 15px;
+  width: 80%;
   font-weight: 600;
   align-items: center;
   justify-content: space-between;
-  margin: 0px 15px;
+  /* margin: 0px 15px; */
   height: 35px;
   position: relative;
   /* z-index: 0; */
