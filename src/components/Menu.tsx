@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import { useDispatch, UseDispatch } from "react-redux";
 import { setDifficulty } from "../redux/slice/gameSlice";
+import Modal from "./Modal/Modal";
 
 const MenuContainer = styled.div`
   display: flex;
@@ -50,6 +51,7 @@ const DifficultyList = ["Beginner", "Intermediate", "Expert"] as const;
 
 function Menu() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
 
   const handleClickMenu = () => {
@@ -61,9 +63,14 @@ function Menu() {
     dispatch(setDifficulty(difficulty));
     setIsOpen(false);
   };
+  const handleModalOpen = () => {
+    setIsModalOpen(true);
+  };
 
   return (
     <MenuContainer>
+      {isModalOpen ? <Modal setIsModalOpen={setIsModalOpen} /> : null}
+
       <MenuButton onClick={handleClickMenu}>Game</MenuButton>
       <MenuContent isOpen={isOpen}>
         <div>New Game</div>
@@ -72,7 +79,7 @@ function Menu() {
             {d}
           </div>
         ))}
-        <div>Custom</div>
+        <div onClick={handleModalOpen}>Custom</div>
       </MenuContent>
 
       <ExitButton>exit</ExitButton>
