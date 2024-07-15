@@ -2,7 +2,11 @@ import styled from "styled-components";
 import Cell from "./Cell";
 import { CellState } from "../constants/types";
 import { RootState } from "../redux/store";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState, useCallback } from "react";
+import { createBoard } from "../utils/createBoard";
+import { randomizeMines } from "../utils/randomizeMines";
+import { setBoard } from "../redux/slice/gameSlice";
 
 const Container = styled.div<{ rows: number; cols: number }>`
   display: grid;
@@ -11,22 +15,42 @@ const Container = styled.div<{ rows: number; cols: number }>`
 `;
 
 function GameBoard() {
+  const dispatch = useDispatch();
   const rows = useSelector((state: RootState) => state.game.rows);
   const cols = useSelector((state: RootState) => state.game.cols);
-  const totalCells = rows * cols;
-  const initialCellState: CellState = {
-    isOpened: false,
-    isFlagged: false,
-    hasMine: false,
-    neighborBombs: 0,
-  };
-  const cells = Array.from({ length: totalCells }, () => initialCellState);
+  const mines = useSelector((state: RootState) => state.game.mines);
+  const gameBoard = useSelector((state: RootState) => state.game.board);
+  console.log(rows, cols, gameBoard);
+  const [firstClick, setFirstClick] = useState(true);
+
+  let gameboard = createBoard(rows, cols);
+
+  const handleCellClick = useCallback(
+    (rowIndex: number, colIndex: number) => {
+      console.log(rowIndex, colIndex);
+
+      if (firstClick) {
+        gameboard = randomizeMines(gameboard, mines);
+
+        const newBoard = createBoard(rows, cols);
+        // dispatch(updateBoard(newBoard));
+        setFirstClick(false);
+      }
+    },
+    [dispatch, firstClick, rows, cols]
+  );
 
   return (
     <Container rows={rows} cols={cols}>
-      {cells.map((cellState, index) => (
-        <Cell cellState={cellState} key={index}></Cell>
-      ))}
+      {gameBoard.map((row, rowIndex) =>
+        row.map((cellState, colIndex) => (
+          <Cell
+            cellState={cellState}
+            key={`${rowIndex}, ${colIndex}`}
+            onClick={() => handleCellClick(rowIndex, colIndex)}
+          ></Cell>
+        ))
+      )}
     </Container>
   );
 }
