@@ -55,16 +55,14 @@ const gameSlice = createSlice({
 
       console.log(state.rows);
     },
-    setBoard: (state, action) => {
-      state.board = createBoard(state.rows, state.cols);
+    updateBoard: (state, action) => {
+      state.board = action.payload;
+      console.log(state.board, "바ㅑ뀜");
     },
-    // updateBoard: (state, action) => {
-    //   state.board = action.payload;
-    // },
   },
 });
 
-export const { setDifficulty, setCustomDifficulty, setBoard } =
+export const { setDifficulty, setCustomDifficulty, updateBoard } =
   gameSlice.actions;
 
 export default gameSlice.reducer;
