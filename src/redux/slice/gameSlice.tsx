@@ -64,6 +64,9 @@ const gameSlice = createSlice({
     openCell: (state, action) => {
       const { x, y } = action.payload;
       const cell = state.board[y][x];
+      if (cell.isFlagged) {
+        return;
+      }
       if (!cell.isOpened) {
         cell.isOpened = true;
         if (cell.hasMine) {
