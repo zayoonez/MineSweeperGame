@@ -75,10 +75,23 @@ const gameSlice = createSlice({
         }
       }
     },
+    flagCell: (state, action) => {
+      const { x, y } = action.payload;
+      const cell = state.board[y][x];
+      // flag 상태 변경
+      if (!cell.isOpened) {
+        cell.isFlagged = !cell.isFlagged;
+      }
+    },
   },
 });
 
-export const { setDifficulty, setCustomDifficulty, startGame, openCell } =
-  gameSlice.actions;
+export const {
+  setDifficulty,
+  setCustomDifficulty,
+  startGame,
+  openCell,
+  flagCell,
+} = gameSlice.actions;
 
 export default gameSlice.reducer;

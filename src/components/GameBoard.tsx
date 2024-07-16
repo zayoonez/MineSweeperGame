@@ -38,7 +38,6 @@ function GameBoard() {
           rowIndex
         );
         dispatch(startGame(startedGameboard));
-        // const newBoard = createBoard(rows, cols);
         setFirstClick(false);
       }
       dispatch(openCell({ x: colIndex, y: rowIndex }));
@@ -54,9 +53,8 @@ function GameBoard() {
             cellState={cellState}
             key={`${rowIndex}, ${colIndex}`}
             onClick={() => handleCellClick(rowIndex, colIndex)}
-            // board={gameBoard}
-            // y={rowIndex}
-            // x={colIndex}
+            rowIndex={rowIndex}
+            colIndex={colIndex}
           ></Cell>
         ))
       )}
