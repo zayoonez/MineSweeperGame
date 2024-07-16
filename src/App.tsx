@@ -25,7 +25,7 @@ function App() {
     <GameContainer>
       <Menu />
       <Boards>
-        <DisplayBoard mineNumValue={0} timeValue={0} />
+        <DisplayBoard timeValue={0} />
         <GameBoard />
       </Boards>
     </GameContainer>

@@ -101,6 +101,11 @@ const gameSlice = createSlice({
       const cell = state.board[y][x];
       // flag 상태 변경
       if (!cell.isOpened) {
+        if (cell.isFlagged) {
+          state.mines += 1;
+        } else {
+          state.mines -= 1;
+        }
         cell.isFlagged = !cell.isFlagged;
       }
     },

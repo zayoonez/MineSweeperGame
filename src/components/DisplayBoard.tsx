@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { RootState } from "../redux/store";
+import { useDispatch, useSelector } from "react-redux";
 
 interface DisplayProps {
-  mineNumValue: number;
   timeValue: number;
 }
 const Container = styled.div`
@@ -32,12 +33,12 @@ const Timer = styled.div`
   color: red;
   width: 60px;
 `;
-const DisplayBoard = ({ mineNumValue, timeValue }: DisplayProps) => {
+const DisplayBoard = ({ timeValue }: DisplayProps) => {
+  const mineNum = useSelector((state: RootState) => state.game.mines);
+
   return (
     <Container>
-      <MineNumDisplay>
-        {mineNumValue.toString().padStart(3, "0")}
-      </MineNumDisplay>
+      <MineNumDisplay>{mineNum.toString().padStart(3, "0")}</MineNumDisplay>
       <MainButton>😃</MainButton>
       <Timer>{timeValue.toString().padStart(3, "0")}</Timer>
     </Container>
