@@ -4,6 +4,7 @@ import { createBoard } from "../../utils/createBoard";
 import { CellState } from "../../constants/types";
 import { GameStatus } from "../../constants/types";
 import { countNeighborMines } from "../../utils/countNeighborMines";
+import { openEmptyCells } from "../../utils/openEmptyCells";
 
 interface GameState {
   rows: number;
@@ -68,13 +69,20 @@ const gameSlice = createSlice({
         return;
       }
       if (!cell.isOpened) {
-        cell.isOpened = true;
+        // cell.isOpened = true;
         if (cell.hasMine) {
           state.gameStatus = "Lose";
+          cell.isOpened = true;
           console.log("짐");
         } else {
           cell.neighborBombs = countNeighborMines(state.board, y, x);
           console.log(cell.neighborBombs, "개 있다");
+          if (cell.neighborBombs === 0) {
+            openEmptyCells(state.board, y, x);
+            cell.isOpened = true;
+          } else {
+            cell.isOpened = true;
+          }
         }
       }
     },

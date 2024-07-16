@@ -50,7 +50,6 @@ function GameBoard() {
       {gameBoard.map((row, rowIndex) =>
         row.map((cellState, colIndex) => (
           <Cell
-            cellState={cellState}
             key={`${rowIndex}, ${colIndex}`}
             onClick={() => handleCellClick(rowIndex, colIndex)}
             rowIndex={rowIndex}

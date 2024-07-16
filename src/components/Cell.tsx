@@ -2,10 +2,10 @@ import styled from "styled-components";
 import { CellState } from "../constants/types";
 import { countNeighborMines } from "../utils/countNeighborMines";
 import { flagCell } from "../redux/slice/gameSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 interface CellProps {
-  cellState: CellState;
   onClick: () => void;
   // board: CellState[][];
   rowIndex: number;
@@ -23,10 +23,9 @@ const CellContainer = styled.div`
 `;
 function Cell(props: CellProps) {
   const dispatch = useDispatch();
-  // console.log(props.cellState);
-  if (props.cellState.hasMine === true) {
-    console.log(props.cellState.hasMine);
-  }
+  const cellState: CellState = useSelector(
+    (state: RootState) => state.game.board[props.rowIndex][props.colIndex]
+  );
   const handleRightClick = (e: React.MouseEvent) => {
     e.preventDefault(); // 기본 동작 방지
     dispatch(flagCell({ x: props.colIndex, y: props.rowIndex }));
@@ -38,11 +37,11 @@ function Cell(props: CellProps) {
       onClick={props.onClick}
       onContextMenu={(e) => handleRightClick(e)}
     >
-      {props.cellState.isOpened
-        ? props.cellState.hasMine
+      {cellState.isOpened
+        ? cellState.hasMine
           ? "💣"
-          : props.cellState.neighborBombs
-        : props.cellState.isFlagged
+          : cellState.neighborBombs
+        : cellState.isFlagged
         ? "🚩"
         : ""}
     </CellContainer>
