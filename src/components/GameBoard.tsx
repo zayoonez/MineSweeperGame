@@ -21,7 +21,6 @@ function GameBoard() {
   const cols = useSelector((state: RootState) => state.game.cols);
   const mines = useSelector((state: RootState) => state.game.mines);
   const gameBoard = useSelector((state: RootState) => state.game.board);
-  console.log(rows, cols, gameBoard);
   const [firstClick, setFirstClick] = useState(true);
 
   const handleCellClick = useCallback(
@@ -32,7 +31,12 @@ function GameBoard() {
         console.log("겜시작");
         let gameboard = createBoard(rows, cols);
 
-        const startedGameboard = randomizeMines(gameboard, mines);
+        const startedGameboard = randomizeMines(
+          gameboard,
+          mines,
+          colIndex,
+          rowIndex
+        );
         dispatch(startGame(startedGameboard));
         // const newBoard = createBoard(rows, cols);
         setFirstClick(false);
