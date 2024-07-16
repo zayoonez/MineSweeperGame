@@ -65,6 +65,7 @@ function Menu() {
   };
   const handleModalOpen = () => {
     setIsModalOpen(true);
+    setIsOpen(false);
   };
 
   return (

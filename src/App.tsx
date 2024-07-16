@@ -12,12 +12,12 @@ const GameContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
 `;
 const Boards = styled.div`
   width: 90%;
   border: 3px solid white;
   background-color: silver;
-  height: 150px;
 `;
 
 function App() {

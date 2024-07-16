@@ -52,8 +52,6 @@ const gameSlice = createSlice({
       state.cols = action.payload.cols;
       state.mines = action.payload.mines;
       state.board = createBoard(state.rows, state.cols);
-
-      console.log(state.rows);
     },
     updateBoard: (state, action) => {
       state.board = action.payload;

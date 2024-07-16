@@ -4,3 +4,14 @@ export type CellState = {
   hasMine: boolean;
   neighborBombs: number;
 };
+
+export const DIRECTIONS: [number, number][] = [
+  [0, -1],
+  [0, 1],
+  [1, -1],
+  [1, 0],
+  [1, 1],
+  [-1, -1],
+  [-1, 0],
+  [-1, 1],
+];

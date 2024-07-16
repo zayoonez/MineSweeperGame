@@ -7,6 +7,7 @@ import { useEffect, useState, useCallback } from "react";
 import { createBoard } from "../utils/createBoard";
 import { randomizeMines } from "../utils/randomizeMines";
 import { updateBoard } from "../redux/slice/gameSlice";
+import { getNeighborMines } from "../utils/countNeighborMines";
 
 const Container = styled.div<{ rows: number; cols: number }>`
   display: grid;
@@ -32,12 +33,11 @@ function GameBoard() {
       if (firstClick) {
         const startedGameboard = randomizeMines(gameboard, mines);
         dispatch(updateBoard(startedGameboard));
-
         // const newBoard = createBoard(rows, cols);
         setFirstClick(false);
       }
     },
-    [dispatch, firstClick, rows, cols]
+    [rows, cols]
   );
 
   return (
@@ -48,6 +48,9 @@ function GameBoard() {
             cellState={cellState}
             key={`${rowIndex}, ${colIndex}`}
             onClick={() => handleCellClick(rowIndex, colIndex)}
+            board={gameBoard}
+            y={rowIndex}
+            x={colIndex}
           ></Cell>
         ))
       )}
