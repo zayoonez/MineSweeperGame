@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { CellState } from "../constants/types";
-import { getNeighborMines } from "../utils/countNeighborMines";
+import { countNeighborMines } from "../utils/countNeighborMines";
 
 interface CellProps {
   cellState: CellState;
   onClick: () => void;
-  board: CellState[][];
-  x: number;
-  y: number;
+  // board: CellState[][];
+  // x: number;
+  // y: number;
 }
 const CellContainer = styled.div`
   display: flex;
@@ -27,8 +27,11 @@ function Cell(props: CellProps) {
 
   return (
     <CellContainer onClick={props.onClick}>
-      {props.cellState.hasMine ? "💣" : ""}
-      {getNeighborMines(props.board, props.x, props.y)}
+      {props.cellState.isOpened &&
+        (props.cellState.hasMine ? "💣" : props.cellState.neighborBombs)}
+
+      {/* {props.cellState.hasMine ? "💣" : ""}
+      {getNeighborMines(props.board, props.x, props.y)} */}
     </CellContainer>
   );
 }

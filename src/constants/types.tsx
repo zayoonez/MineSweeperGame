@@ -15,3 +15,5 @@ export const DIRECTIONS: [number, number][] = [
   [-1, 0],
   [-1, 1],
 ];
+
+export type GameStatus = "Ready" | "Playing" | "Lose" | "Win";

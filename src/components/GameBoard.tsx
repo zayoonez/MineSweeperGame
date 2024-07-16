@@ -6,8 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState, useCallback } from "react";
 import { createBoard } from "../utils/createBoard";
 import { randomizeMines } from "../utils/randomizeMines";
-import { updateBoard } from "../redux/slice/gameSlice";
-import { getNeighborMines } from "../utils/countNeighborMines";
+import { startGame, openCell } from "../redux/slice/gameSlice";
+import { countNeighborMines } from "../utils/countNeighborMines";
 
 const Container = styled.div<{ rows: number; cols: number }>`
   display: grid;
@@ -24,20 +24,22 @@ function GameBoard() {
   console.log(rows, cols, gameBoard);
   const [firstClick, setFirstClick] = useState(true);
 
-  let gameboard = createBoard(rows, cols);
-
   const handleCellClick = useCallback(
     (rowIndex: number, colIndex: number) => {
       console.log(rowIndex, colIndex);
 
       if (firstClick) {
+        console.log("겜시작");
+        let gameboard = createBoard(rows, cols);
+
         const startedGameboard = randomizeMines(gameboard, mines);
-        dispatch(updateBoard(startedGameboard));
+        dispatch(startGame(startedGameboard));
         // const newBoard = createBoard(rows, cols);
         setFirstClick(false);
       }
+      dispatch(openCell({ x: colIndex, y: rowIndex }));
     },
-    [rows, cols]
+    [firstClick, rows, cols]
   );
 
   return (
@@ -48,9 +50,9 @@ function GameBoard() {
             cellState={cellState}
             key={`${rowIndex}, ${colIndex}`}
             onClick={() => handleCellClick(rowIndex, colIndex)}
-            board={gameBoard}
-            y={rowIndex}
-            x={colIndex}
+            // board={gameBoard}
+            // y={rowIndex}
+            // x={colIndex}
           ></Cell>
         ))
       )}

@@ -1,7 +1,7 @@
 import { CellState, DIRECTIONS } from "../constants/types";
 
 // 이차원 배열의 GameBoard 생성
-export const getNeighborMines = (
+export const countNeighborMines = (
   board: CellState[][],
   x: number,
   y: number
@@ -21,7 +21,7 @@ export const getNeighborMines = (
       neighborX < width &&
       neighborY >= 0 &&
       neighborY < height &&
-      board[neighborY][neighborX].hasMine
+      board[neighborX][neighborY].hasMine
     ) {
       mineNum++;
     }

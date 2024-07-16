@@ -7,6 +7,13 @@ export const randomizeMines = (gameBoard: CellState[][], mines: number) => {
   // 중복되지 않는 set 집합 선언
   let MineSet = new Set<number>();
 
+  const newBoard = gameBoard.map((row) =>
+    row.map((cell) => ({
+      ...cell,
+      hasMine: false, // 모든 셀의 hasMine을 초기화
+    }))
+  );
+
   while (MineSet.size < mines) {
     let mineIndex = Math.floor(Math.random() * rows * cols);
     MineSet.add(mineIndex);
@@ -16,8 +23,9 @@ export const randomizeMines = (gameBoard: CellState[][], mines: number) => {
     const x = Math.floor(mineIndex / cols);
     const y = Math.floor(mineIndex % cols);
 
-    gameBoard[x][y].hasMine = true;
+    newBoard[x][y].hasMine = true; // 복사본의 hasMine을 true로 설정
   });
+  console.log(newBoard);
 
-  return gameBoard;
+  return newBoard;
 };
