@@ -12,6 +12,7 @@ interface GameState {
   mines: number;
   board: CellState[][];
   gameStatus: GameStatus;
+  lastClickedCell: { x: number; y: number } | null;
 }
 
 const initialState: GameState = {
@@ -20,6 +21,7 @@ const initialState: GameState = {
   mines: 10,
   board: createBoard(8, 8),
   gameStatus: "Ready",
+  lastClickedCell: null,
 };
 
 const gameSlice = createSlice({
@@ -59,20 +61,28 @@ const gameSlice = createSlice({
       state.board = createBoard(state.rows, state.cols);
     },
     startGame: (state, action) => {
+      console.log("시작");
       state.board = action.payload;
       state.gameStatus = "Playing";
+      state.lastClickedCell = null;
     },
     openCell: (state, action) => {
       const { x, y } = action.payload;
       const cell = state.board[y][x];
-      if (cell.isFlagged) {
+      if (cell.isFlagged || state.gameStatus === "Lose") {
         return;
       }
       if (!cell.isOpened) {
-        // cell.isOpened = true;
+        state.lastClickedCell = { x: y, y: x };
         if (cell.hasMine) {
           state.gameStatus = "Lose";
           cell.isOpened = true;
+
+          state.board = state.board.map((row) =>
+            row.map((cell) =>
+              cell.hasMine ? { ...cell, isOpened: true } : cell
+            )
+          );
           console.log("짐");
         } else {
           cell.neighborBombs = countNeighborMines(state.board, y, x);
@@ -94,6 +104,16 @@ const gameSlice = createSlice({
         cell.isFlagged = !cell.isFlagged;
       }
     },
+    // setGameStatus: (state, action) => {
+    //   state.gameStatus = action.payload;
+    //   if (action.payload === "Lose") {
+    //     // 지뢰를 보이도록 업데이트
+    //     console.log("---끝!");
+    //     state.board = state.board.map((row) =>
+    //       row.map((cell) => (cell.hasMine ? { ...cell, isOpened: true } : cell))
+    //     );
+    //   }
+    // },
   },
 });
 

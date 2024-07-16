@@ -21,6 +21,8 @@ function GameBoard() {
   const cols = useSelector((state: RootState) => state.game.cols);
   const mines = useSelector((state: RootState) => state.game.mines);
   const gameBoard = useSelector((state: RootState) => state.game.board);
+  const gameStatus = useSelector((state: RootState) => state.game.gameStatus);
+
   const [firstClick, setFirstClick] = useState(true);
 
   const handleCellClick = useCallback(
