@@ -14,16 +14,23 @@ const MenuContainer = styled.div`
   display: flex;
   flex-direction: row;
   font-size: 15px;
-  width: 80%;
   font-weight: 600;
-  align-items: center;
   justify-content: space-between;
   height: 35px;
   position: relative;
 `;
 
 const MenuButton = styled.div`
-  cursor: default;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  width: 45px;
+  height: 20px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  &:active {
+    box-shadow: 1px 1px 3px 1px #8c8c8c inset;
+  }
 `;
 
 const MenuContent = styled.div<{ isOpen: boolean }>`
@@ -31,7 +38,7 @@ const MenuContent = styled.div<{ isOpen: boolean }>`
   position: absolute;
   /* top: -20px; */
   left: -10px;
-  bottom: -175px;
+  bottom: -165px;
   z-index: 50;
   font-weight: 400;
   background-color: #f9f9f9;
@@ -49,7 +56,16 @@ const MenuContent = styled.div<{ isOpen: boolean }>`
   }
 `;
 const ExitButton = styled.div`
-  /* font-size: 12px; */
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  width: 45px;
+  height: 20px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  &:active {
+    box-shadow: 1px 1px 3px 1px #8c8c8c inset;
+  }
 `;
 const DifficultyList = ["Beginner", "Intermediate", "Expert"] as const;
 

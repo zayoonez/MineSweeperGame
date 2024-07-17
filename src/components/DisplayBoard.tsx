@@ -20,11 +20,13 @@ const MineNumDisplay = styled.div`
   background-color: black;
   color: red;
   width: 70px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 `;
 const Timer = styled.div`
   background-color: black;
   color: red;
   width: 70px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 `;
 const DisplayBoard = () => {
   const dispatch = useDispatch();

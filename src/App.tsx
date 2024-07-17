@@ -8,13 +8,12 @@ const GameContainer = styled.div`
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   width: fit-content;
+  padding: 30px;
+  box-shadow: 1px 3px 5px 1px #9c9c9c;
 `;
 const Boards = styled.div`
-  width: 90%;
-  border: 3px solid white;
+  /* width: 90%; */
   background-color: silver;
 `;
 
