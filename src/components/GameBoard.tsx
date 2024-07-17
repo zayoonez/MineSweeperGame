@@ -36,9 +36,9 @@ function GameBoard() {
     if (savedRows && savedCols && savedMines) {
       dispatch(
         setCustomDifficulty({
-          rows: savedRows,
-          cols: savedCols,
-          mines: savedMines,
+          rows: JSON.parse(savedRows),
+          cols: JSON.parse(savedCols),
+          mines: JSON.parse(savedMines),
         })
       );
     }

@@ -1,46 +1,53 @@
-# Getting Started with Create React App
+# Minsweeper 사전과제
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 설치 및 실행
 
-## Available Scripts
+### 의존성 패키지 설치
 
-In the project directory, you can run:
+`npm install`
 
-### `npm start`
+### **실행**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+`npm start`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 디렉토리 구조
 
-### `npm test`
+```
+📦src
+ ┣ 📂components
+ ┃ ┣ 📂Modal
+ ┃ ┃ ┗ 📜CustomModal.tsx
+ ┃ ┣ 📜Cell.tsx
+ ┃ ┣ 📜DisplayBoard.tsx
+ ┃ ┣ 📜GameBoard.tsx
+ ┃ ┗ 📜Menu.tsx
+ ┣ 📂constants           // 공통 상수 폴더
+ ┃ ┗ 📜types.tsx
+ ┣ 📂redux
+ ┃ ┣ 📂slice              // game과 관련된 reducers
+ ┃ ┃ ┗ 📜gameSlice.tsx
+ ┃ ┗ 📜store.tsx
+ ┣ 📂utils.                  // 로직 처리 함수들
+ ┃ ┣ 📜countNeighborMines.tsx
+ ┃ ┣ 📜createBoard.tsx
+ ┃ ┣ 📜openEmptyCells.tsx
+ ┃ ┗ 📜randomizeMines.tsx
+ ┣ 📜App.test.tsx
+ ┣ 📜App.tsx
+ ┣ 📜index.tsx
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 구현 내용
 
-### `npm run build`
+- [x] 처음 셀 클릭 시 지뢰가 터지지 않고, 게임 시작
+- [x] 게임 난이도 변경 ( Beginner, Intermediate, Expert, Custom )
+  - custom 으로 난이도 조정 시, Modal 창이 뜨며 가로, 세로, 지뢰수가 각각 최대 100, 100, 총 격자칸 수의 1/3 이하인지 입력 검증
+- [x] 난이도가 변경될 때마다 찾아내야하는 지뢰 개수 좌측 display 보드에 표시
+- [x] 오른쪽 클릭시 깃발 표시 기능
+- [x] 타이머 기능
+  - 게임 시작 시 타이머 시작
+  - 999초가 넘어가면 게임 초기화
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 추가 구현 사항
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [x] 난이도 데이터 저장 → questionSlice에서 난이도 저장 후, gameBoard 컴포넌트가 마운트 될 때 저장된 난이도로 게임 시작
