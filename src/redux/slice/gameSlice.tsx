@@ -5,6 +5,7 @@ import { CellState } from "../../constants/types";
 import { GameStatus } from "../../constants/types";
 import { countNeighborMines } from "../../utils/countNeighborMines";
 import { openEmptyCells } from "../../utils/openEmptyCells";
+import { randomizeMines } from "../../utils/randomizeMines";
 
 interface GameState {
   rows: number;
@@ -36,37 +37,41 @@ const gameSlice = createSlice({
           state.rows = 8;
           state.cols = 8;
           state.mines = 10;
-          state.board = createBoard(state.rows, state.cols);
-
           break;
         case "Intermediate":
           state.rows = 16;
           state.cols = 16;
           state.mines = 40;
-          state.board = createBoard(state.rows, state.cols);
-
           break;
         case "Expert":
           state.rows = 16;
           state.cols = 32;
           state.mines = 100;
-          state.board = createBoard(state.rows, state.cols);
           break;
         default:
           break;
       }
+      state.board = createBoard(state.rows, state.cols);
+      state.gameStatus = "Ready";
+      state.lastClickedCell = null;
+      state.timer = 0;
     },
     setCustomDifficulty: (state, action) => {
       state.rows = action.payload.rows;
       state.cols = action.payload.cols;
       state.mines = action.payload.mines;
       state.board = createBoard(state.rows, state.cols);
+      state.gameStatus = "Ready";
+      state.lastClickedCell = null;
+      state.timer = 0;
     },
+
     startGame: (state, action) => {
       console.log("시작");
+      state.gameStatus = "Ready";
       state.board = action.payload;
-      state.gameStatus = "Playing";
       state.lastClickedCell = null;
+      state.timer = 0;
     },
     openCell: (state, action) => {
       const { x, y } = action.payload;
@@ -76,6 +81,7 @@ const gameSlice = createSlice({
       }
       if (!cell.isOpened) {
         state.lastClickedCell = { x: y, y: x };
+        state.gameStatus = "Playing";
         if (cell.hasMine) {
           state.gameStatus = "Lose";
           cell.isOpened = true;
@@ -97,6 +103,7 @@ const gameSlice = createSlice({
           }
         }
       }
+      console.log(state.gameStatus);
     },
     flagCell: (state, action) => {
       const { x, y } = action.payload;
@@ -119,6 +126,7 @@ const gameSlice = createSlice({
     },
     setGameStatus(state, action) {
       state.gameStatus = action.payload;
+      console.log(state.gameStatus, "슬라이스에서 알립니다");
     },
   },
 });

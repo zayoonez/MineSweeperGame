@@ -1,8 +1,14 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { useDispatch, UseDispatch } from "react-redux";
-import { setDifficulty } from "../redux/slice/gameSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setDifficulty,
+  setGameStatus,
+  startGame,
+} from "../redux/slice/gameSlice";
 import Modal from "./Modal/CustomModal";
+import { RootState } from "../redux/store";
+import { createBoard } from "../utils/createBoard";
 
 const MenuContainer = styled.div`
   display: flex;
@@ -53,7 +59,8 @@ function Menu() {
   const [isOpen, setIsOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
-
+  const rows = useSelector((state: RootState) => state.game.rows);
+  const cols = useSelector((state: RootState) => state.game.cols);
   const handleClickMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -61,11 +68,20 @@ function Menu() {
     difficulty: (typeof DifficultyList)[number] // "Beginner" , "Intermediate" , "Expert"
   ) => {
     dispatch(setDifficulty(difficulty));
+    dispatch(setGameStatus("Ready"));
     setIsOpen(false);
   };
+
   const handleModalOpen = () => {
     setIsModalOpen(true);
     setIsOpen(false);
+  };
+
+  const handleNewGame = () => {
+    setIsOpen(false);
+    dispatch(setGameStatus("Ready"));
+    const newBoard = createBoard(rows, cols);
+    dispatch(startGame(newBoard));
   };
 
   return (
@@ -74,7 +90,7 @@ function Menu() {
 
       <MenuButton onClick={handleClickMenu}>Game</MenuButton>
       <MenuContent isOpen={isOpen}>
-        <div>New Game</div>
+        <div onClick={handleNewGame}>New Game</div>
         {DifficultyList.map((d) => (
           <div key={d} onClick={() => handleDifficulty(d)}>
             {d}
