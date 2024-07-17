@@ -18,10 +18,8 @@ const MenuContainer = styled.div`
   font-weight: 600;
   align-items: center;
   justify-content: space-between;
-  /* margin: 0px 15px; */
   height: 35px;
   position: relative;
-  /* z-index: 0; */
 `;
 
 const MenuButton = styled.div`

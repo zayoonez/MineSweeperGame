@@ -1,10 +1,8 @@
 import styled from "styled-components";
 import { CellState } from "../constants/types";
-import { countNeighborMines } from "../utils/countNeighborMines";
 import { flagCell } from "../redux/slice/gameSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
-import { useState } from "react";
 
 interface CellProps {
   onClick: () => void;

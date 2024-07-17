@@ -1,13 +1,10 @@
 import styled from "styled-components";
 import Cell from "./Cell";
-import { CellState } from "../constants/types";
 import { RootState } from "../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState, useCallback } from "react";
-import { createBoard } from "../utils/createBoard";
 import { randomizeMines } from "../utils/randomizeMines";
 import { startGame, openCell, setGameStatus } from "../redux/slice/gameSlice";
-import { countNeighborMines } from "../utils/countNeighborMines";
 
 const Container = styled.div<{ rows: number; cols: number }>`
   display: grid;

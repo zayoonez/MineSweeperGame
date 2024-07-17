@@ -1,4 +1,3 @@
-// src/utils/revealEmptyCells.tsx
 import { countNeighborMines } from "./countNeighborMines";
 import { DIRECTIONS } from "../constants/types";
 

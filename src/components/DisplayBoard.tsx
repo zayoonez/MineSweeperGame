@@ -1,17 +1,11 @@
 import styled from "styled-components";
 import { RootState } from "../redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import {
-  incrementTime,
-  resetTime,
-  setGameStatus,
-} from "../redux/slice/gameSlice";
+import { useEffect } from "react";
+import { incrementTime, setGameStatus } from "../redux/slice/gameSlice";
 
 const Container = styled.div`
   width: 100%;
-  /* background-color: black; */
-  /* height: 70px; */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -25,16 +19,12 @@ const Container = styled.div`
 const MineNumDisplay = styled.div`
   background-color: black;
   color: red;
-  width: 60px;
-`;
-const MainButton = styled.div`
-  background-color: white;
-  cursor: pointer;
+  width: 70px;
 `;
 const Timer = styled.div`
   background-color: black;
   color: red;
-  width: 60px;
+  width: 70px;
 `;
 const DisplayBoard = () => {
   const dispatch = useDispatch();
@@ -66,7 +56,6 @@ const DisplayBoard = () => {
   return (
     <Container>
       <MineNumDisplay>{mineNum.toString().padStart(3, "0")}</MineNumDisplay>
-      <MainButton>😃</MainButton>
       <Timer>{time.toString().padStart(3, "0")}</Timer>
     </Container>
   );

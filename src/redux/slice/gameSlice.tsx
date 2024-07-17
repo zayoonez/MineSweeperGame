@@ -5,7 +5,6 @@ import { CellState } from "../../constants/types";
 import { GameStatus } from "../../constants/types";
 import { countNeighborMines } from "../../utils/countNeighborMines";
 import { openEmptyCells } from "../../utils/openEmptyCells";
-import { randomizeMines } from "../../utils/randomizeMines";
 
 interface GameState {
   rows: number;
