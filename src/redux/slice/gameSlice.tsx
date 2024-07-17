@@ -54,6 +54,10 @@ const gameSlice = createSlice({
       state.gameStatus = "Ready";
       state.lastClickedCell = null;
       state.timer = 0;
+
+      localStorage.setItem("rows", JSON.stringify(state.rows));
+      localStorage.setItem("cols", JSON.stringify(state.cols));
+      localStorage.setItem("mines", JSON.stringify(state.mines));
     },
     setCustomDifficulty: (state, action) => {
       state.rows = action.payload.rows;
@@ -63,10 +67,13 @@ const gameSlice = createSlice({
       state.gameStatus = "Ready";
       state.lastClickedCell = null;
       state.timer = 0;
+
+      localStorage.setItem("rows", JSON.stringify(state.rows));
+      localStorage.setItem("cols", JSON.stringify(state.cols));
+      localStorage.setItem("mines", JSON.stringify(state.mines));
     },
 
     startGame: (state, action) => {
-      console.log("시작");
       state.gameStatus = "Ready";
       state.board = action.payload;
       state.lastClickedCell = null;
@@ -90,10 +97,8 @@ const gameSlice = createSlice({
               cell.hasMine ? { ...cell, isOpened: true } : cell
             )
           );
-          console.log("짐");
         } else {
           cell.neighborBombs = countNeighborMines(state.board, y, x);
-          console.log(cell.neighborBombs, "개 있다");
           if (cell.neighborBombs === 0) {
             openEmptyCells(state.board, y, x);
             cell.isOpened = true;
@@ -102,7 +107,6 @@ const gameSlice = createSlice({
           }
         }
       }
-      console.log(state.gameStatus);
     },
     flagCell: (state, action) => {
       const { x, y } = action.payload;
@@ -125,7 +129,6 @@ const gameSlice = createSlice({
     },
     setGameStatus(state, action) {
       state.gameStatus = action.payload;
-      console.log(state.gameStatus, "슬라이스에서 알립니다");
     },
   },
 });

@@ -10,7 +10,6 @@ export const openEmptyCells = (board: any[][], x: number, y: number) => {
     }
 
     const cell = board[x][y];
-    console.log("x좌표", x, "y좌표", y, "탐색중");
     if (cell.isOpened || cell.isFlagged || cell.hasMine) {
       return;
     }
@@ -20,7 +19,6 @@ export const openEmptyCells = (board: any[][], x: number, y: number) => {
 
     if (cell.neighborBombs === 0) {
       for (const [dx, dy] of DIRECTIONS) {
-        console.log(x + dx, y + dy, "에서 0");
         open(x + dx, y + dy);
       }
     }

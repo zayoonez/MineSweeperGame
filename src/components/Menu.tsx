@@ -38,7 +38,7 @@ const MenuContent = styled.div<{ isOpen: boolean }>`
   position: absolute;
   /* top: -20px; */
   left: -10px;
-  bottom: -165px;
+  bottom: -135px;
   z-index: 50;
   font-weight: 400;
   background-color: #f9f9f9;
@@ -55,7 +55,7 @@ const MenuContent = styled.div<{ isOpen: boolean }>`
     }
   }
 `;
-const ExitButton = styled.div`
+const NewButton = styled.div`
   display: flex;
   align-items: center;
   text-align: center;
@@ -104,7 +104,6 @@ function Menu() {
 
       <MenuButton onClick={handleClickMenu}>Game</MenuButton>
       <MenuContent isOpen={isOpen}>
-        <div onClick={handleNewGame}>New Game</div>
         {DifficultyList.map((d) => (
           <div key={d} onClick={() => handleDifficulty(d)}>
             {d}
@@ -113,7 +112,7 @@ function Menu() {
         <div onClick={handleModalOpen}>Custom</div>
       </MenuContent>
 
-      <ExitButton>exit</ExitButton>
+      <NewButton onClick={handleNewGame}>NEW</NewButton>
     </MenuContainer>
   );
 }

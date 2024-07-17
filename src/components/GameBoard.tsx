@@ -4,7 +4,12 @@ import { RootState } from "../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState, useCallback } from "react";
 import { randomizeMines } from "../utils/randomizeMines";
-import { startGame, openCell, setGameStatus } from "../redux/slice/gameSlice";
+import {
+  startGame,
+  openCell,
+  setGameStatus,
+  setCustomDifficulty,
+} from "../redux/slice/gameSlice";
 
 const Container = styled.div<{ rows: number; cols: number }>`
   display: grid;
@@ -21,6 +26,24 @@ function GameBoard() {
   const gameStatus = useSelector((state: RootState) => state.game.gameStatus);
 
   const [firstClick, setFirstClick] = useState(true);
+
+  // 첫 마운트 시 localStorage에 저장된 난이도 적용
+  useEffect(() => {
+    const savedRows = localStorage.getItem("rows");
+    const savedCols = localStorage.getItem("cols");
+    const savedMines = localStorage.getItem("mines");
+
+    if (savedRows && savedCols && savedMines) {
+      dispatch(
+        setCustomDifficulty({
+          rows: savedRows,
+          cols: savedCols,
+          mines: savedMines,
+        })
+      );
+    }
+  }, [dispatch]);
+
   // 새로운 게임보드 입력시 firstclick 도 초기화
   useEffect(() => {
     if (gameStatus === "Ready") {
@@ -30,10 +53,7 @@ function GameBoard() {
 
   const handleCellClick = useCallback(
     (rowIndex: number, colIndex: number) => {
-      console.log(rowIndex, colIndex);
-
       if (firstClick) {
-        console.log("겜시작");
         const startedGameboard = randomizeMines(
           gameBoard,
           mines,

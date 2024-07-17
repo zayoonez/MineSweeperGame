@@ -35,7 +35,6 @@ export const randomizeMines = (
 
     newBoard[x][y].hasMine = true; // 복사본의 hasMine을 true로 설정
   });
-  console.log(newBoard);
 
   return newBoard;
 };

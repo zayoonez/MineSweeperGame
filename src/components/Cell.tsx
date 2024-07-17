@@ -54,7 +54,6 @@ function Cell(props: CellProps) {
   const handleRightClick = (e: React.MouseEvent) => {
     e.preventDefault(); // 기본 동작 방지
     dispatch(flagCell({ x: props.colIndex, y: props.rowIndex }));
-    console.log(props.rowIndex, props.colIndex);
   };
   const handleClick = () => {
     props.onClick();
