@@ -13,6 +13,7 @@ interface GameState {
   board: CellState[][];
   gameStatus: GameStatus;
   lastClickedCell: { x: number; y: number } | null;
+  timer: number;
 }
 
 const initialState: GameState = {
@@ -22,6 +23,7 @@ const initialState: GameState = {
   board: createBoard(8, 8),
   gameStatus: "Ready",
   lastClickedCell: null,
+  timer: 0,
 };
 
 const gameSlice = createSlice({
@@ -109,16 +111,15 @@ const gameSlice = createSlice({
         cell.isFlagged = !cell.isFlagged;
       }
     },
-    // setGameStatus: (state, action) => {
-    //   state.gameStatus = action.payload;
-    //   if (action.payload === "Lose") {
-    //     // 지뢰를 보이도록 업데이트
-    //     console.log("---끝!");
-    //     state.board = state.board.map((row) =>
-    //       row.map((cell) => (cell.hasMine ? { ...cell, isOpened: true } : cell))
-    //     );
-    //   }
-    // },
+    incrementTime(state) {
+      state.timer += 1;
+    },
+    resetTime(state) {
+      state.timer = 0;
+    },
+    setGameStatus(state, action) {
+      state.gameStatus = action.payload;
+    },
   },
 });
 
@@ -128,6 +129,9 @@ export const {
   startGame,
   openCell,
   flagCell,
+  incrementTime,
+  resetTime,
+  setGameStatus,
 } = gameSlice.actions;
 
 export default gameSlice.reducer;
