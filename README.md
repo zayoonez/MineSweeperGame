@@ -44,6 +44,7 @@
   - custom 으로 난이도 조정 시, Modal 창이 뜨며 가로, 세로, 지뢰수가 각각 최대 100, 100, 총 격자칸 수의 1/3 이하인지 입력 검증
 - [x] 난이도가 변경될 때마다 찾아내야하는 지뢰 개수 좌측 display 보드에 표시
 - [x] 오른쪽 클릭시 깃발 표시 기능
+- [x] 새로고침 혹은 new 버튼 클릭 시 기존 난이도의 게임 재시작 (Slice - localstorage 저장)
 - [x] 타이머 기능
   - 게임 시작 시 타이머 시작
   - 999초가 넘어가면 게임 초기화
@@ -51,8 +52,3 @@
 ![image1](https://github.com/user-attachments/assets/a2b059d8-9085-4752-ae4d-67b51c70430e)
 ### 구현 영상
 https://github.com/user-attachments/assets/46137f42-e2ee-4112-8f88-0a84f9e26bb9
-
-
-## 추가 구현 사항
-
-- [x] 난이도 데이터 저장 → questionSlice에서 난이도 저장 후, gameBoard 컴포넌트가 마운트 될 때 저장된 난이도로 게임 시작
