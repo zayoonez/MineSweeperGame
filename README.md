@@ -1,4 +1,4 @@
-# Minsweeper 사전과제
+# Minsweeper 지뢰찾기 게임
 
 ## 설치 및 실행
 
@@ -47,6 +47,11 @@
 - [x] 타이머 기능
   - 게임 시작 시 타이머 시작
   - 999초가 넘어가면 게임 초기화
+## 구현 UI
+![image1](https://github.com/user-attachments/assets/a2b059d8-9085-4752-ae4d-67b51c70430e)
+### 구현 영상
+https://github.com/user-attachments/assets/46137f42-e2ee-4112-8f88-0a84f9e26bb9
+
 
 ## 추가 구현 사항
 
